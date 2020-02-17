@@ -9,16 +9,6 @@ class Nicehash {
     this.apiSecret = apiSecret
     this.organizationId = organizationId
 
-    request.defaults({
-      baseUrl: `https://api2.nicehash.com`,
-      forever: true,
-      timeout: 3000,
-      headers: {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/74.0.3729.169 Safari/537.36',
-        'X-Organization-Id': this.organizationId
-      },
-      json: true
-    })
 
   }
 
@@ -50,10 +40,11 @@ class Nicehash {
     headers['X-Auth'] = `${this.apikey}:${this.hmacSha256BySegments(input)}`
 
     request({
-      url: `${path}${query ? '?' : ''}${query}`,
+      url: `https://api2.nicehash.com${path}${query ? '?' : ''}${query}`,
       body,
       method,
-      headers
+      headers,
+      json: true
     }, cb)
   }
 
