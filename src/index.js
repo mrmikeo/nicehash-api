@@ -16,7 +16,8 @@ class Nicehash {
     let headers = {
       'X-Request-Id': +Date.now(),
       'X-Time': +Date.now(),
-      'X-Nonce': chance.guid()
+      'X-Nonce': chance.guid(),
+      'X-Organization-Id': this.organizationId
     }
 
     query = qs.stringify(query)
