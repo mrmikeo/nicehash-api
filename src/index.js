@@ -39,6 +39,11 @@ class Nicehash {
 
     headers['X-Auth'] = `${this.apikey}:${this.hmacSha256BySegments(input)}`
 
+console.log(`https://api2.nicehash.com${path}${query ? '?' : ''}${query}`);
+console.log(body);
+console.log(method);
+console.log(headers);
+    
     request({
       url: `https://api2.nicehash.com${path}${query ? '?' : ''}${query}`,
       body,
