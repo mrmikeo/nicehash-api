@@ -1,5 +1,6 @@
 # Nicehash Api v2 Wrapper
 
+```
 const Nicehash 	= require('nicehash-api');
 
 var nicehashkey = "x";
@@ -13,3 +14,4 @@ niceh.orderBook({algorithm:'SCRYPT', size:100, page:0}, function(err, response, 
   console.log(body);
 
 })
+```
