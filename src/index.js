@@ -1,5 +1,4 @@
 const request = require('request')
-const throttledRequest = require('throttled-request')
 const chance = require('chance').Chance()
 const crypto = require('crypto')
 const qs = require('querystring')
@@ -10,7 +9,7 @@ class Nicehash {
     this.apiSecret = apiSecret
     this.organizationId = organizationId
 
-    this.httpClient = throttledRequest(request.defaults({
+    request.defaults({
       baseUrl: `https://api2.nicehash.com`,
       forever: true,
       timeout: 3000,
@@ -19,12 +18,8 @@ class Nicehash {
         'X-Organization-Id': this.organizationId
       },
       json: true
-    }))
-
-    this.httpClient.configure({
-      requests: 1,
-      milliseconds: 1500 * 2
     })
+
   }
 
   request (method, path, query, body, cb) {
@@ -54,7 +49,7 @@ class Nicehash {
 
     headers['X-Auth'] = `${this.apikey}:${this.hmacSha256BySegments(input)}`
 
-    this.httpClient({
+    request({
       url: `${path}${query ? '?' : ''}${query}`,
       body,
       method,
